@@ -1,4 +1,19 @@
-<script src='https://cdn.jotfor.ms/agent/embedjs/0195424fb5d47897a72080768094791e9c32/embed.js'>
+<iframe id="JotFormIFrame-0195424fb5d47897a72080768094791e9c32" title="Dkonsult:"
+  onload="window.parent.scrollTo(0,0)" allowtransparency="true"
+  allow="geolocation; microphone; camera; fullscreen"
+  src="https://agent.jotform.com/0195424fb5d47897a72080768094791e9c32?embedMode=iframe&background=1&shadow=1"
+  frameborder="0" style="
+    max-width:100%;
+    height:688px;
+    border:none;
+    
+    width:100%;
+  " scrolling="no">
+</iframe>
+<script src='https://cdn.jotfor.ms/s/umd/984e2989e4d/for-form-embed-handler.js'></script>
+<script>
+  window.jotformEmbedHandler("iframe[id='JotFormIFrame-0195424fb5d47897a72080768094791e9c32']",
+    "https://www.jotform.com")
 </script>
 
 <a href="https://chat.vercel.ai/">
