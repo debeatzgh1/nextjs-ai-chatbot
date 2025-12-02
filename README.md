@@ -6,72 +6,66 @@
 <title>Debeatzgh AI Agents Hub</title>
 
 <style>
-/* ======== GLOBAL STYLES ======== */
 body {
-  font-family: Arial, sans-serif;
   margin: 0;
-  background: #f4f4f4;
+  font-family: Arial, sans-serif;
+  overflow-y: auto !important;    /* PREVENT SCROLL LOCK */
 }
 
-/* ===== FLOATING AI BUTTON ===== */
+/* Floating button */
 .floating-ai-btn {
   position: fixed;
   top: 20px;
   right: 20px;
   background: #0b8dff;
   color: #fff;
-  padding: 12px 16px;
-  font-size: 14px;
+  padding: 10px 16px;
   border-radius: 50px;
-  cursor: pointer;
-  z-index: 9999;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+  font-size: 14px;
   display: flex;
   align-items: center;
-  gap: 6px;
-}
-
-.floating-ai-btn img {
-  width: 22px;
-  height: 22px;
-  border-radius: 50%;
-}
-
-/* ===== MODAL BACKDROP ===== */
-#agentModal {
-  display: none;
-  position: fixed;
-  top: 0; left: 0;
-  width: 100%; height: 100%;
-  background: rgba(0,0,0,0.6);
-  backdrop-filter: blur(4px);
+  gap: 5px;
+  cursor: pointer;
   z-index: 99999;
 }
 
-/* ===== MODAL CONTAINER ===== */
+.floating-ai-btn img {
+  width: 20px;
+  height: 20px;
+}
+
+/* Modal (NO SCROLL BLOCKING) */
+#agentModal {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.55);
+  z-index: 999999;
+  overflow-y: auto !important;     /* MAKE MODAL SCROLLABLE */
+  padding: 20px 0;
+}
+
+/* Modal Window */
 .agent-modal-content {
   background: #fff;
   width: 95%;
   max-width: 900px;
-  margin: 50px auto;
-  border-radius: 10px;
+  margin: auto;
+  border-radius: 12px;
   padding: 20px;
   position: relative;
 }
 
-/* Close Button */
 .close-modal {
   position: absolute;
   top: 12px;
-  right: 18px;
+  right: 20px;
   font-size: 28px;
   cursor: pointer;
-  color: #333;
 }
 
-/* ===== CAROUSEL STYLES ===== */
+/******** CAROUSEL ********/
 .carousel {
-  position: relative;
   overflow: hidden;
 }
 
@@ -82,13 +76,9 @@ body {
 
 .carousel-item {
   min-width: 100%;
-  padding: 10px;
 }
 
 .agent-card {
-  background: #fff;
-  border-radius: 12px;
-  padding: 15px;
   text-align: center;
 }
 
@@ -97,31 +87,46 @@ body {
   max-height: 220px;
   object-fit: cover;
   border-radius: 12px;
-  margin-bottom: 15px;
 }
 
+/***** SCROLLABLE IFRAME FIX ******/
+.agent-iframe-wrapper {
+  width: 100%;
+  height: 650px;
+  overflow-y: scroll !important;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  margin-top: 15px;
+  background: #fff;
+}
+
+.agent-iframe-wrapper iframe {
+  width: 100%;
+  height: 1000px;  /* large so user scrolls inside wrapper */
+  border: none;
+}
+
+/* Buttons */
 .view-btn {
   background: #0faa4b;
+  padding: 10px 16px;
   color: #fff;
-  padding: 12px 18px;
   border-radius: 8px;
   text-decoration: none;
   display: inline-block;
-  font-size: 16px;
   margin-top: 10px;
 }
 
-/* Carousel Navigation */
 .carousel-nav {
   display: flex;
   justify-content: space-between;
-  margin-top: 10px;
+  margin-top: 12px;
 }
 
 .carousel-btn {
   background: #0b8dff;
-  color: #fff;
   padding: 8px 14px;
+  color: #fff;
   border-radius: 8px;
   cursor: pointer;
 }
@@ -130,100 +135,88 @@ body {
 
 <body>
 
-<!-- FLOATING BUTTON -->
 <div class="floating-ai-btn" onclick="openModal()">
-  <img src="https://cdn-icons-png.flaticon.com/512/4712/4712100.png" alt="AI Icon">
+  <img src="https://cdn-icons-png.flaticon.com/512/4712/4712100.png" />
   AI Agents
 </div>
 
-<!-- MODAL POPUP -->
+<!-- Modal -->
 <div id="agentModal">
   <div class="agent-modal-content">
 
     <span class="close-modal" onclick="closeModal()">&times;</span>
+    <h2 style="text-align:center;">Debeatzgh AI Agent Hub</h2>
 
-    <h2 style="text-align:center; margin-top:10px;">Debeatzgh AI Assistant Hub</h2>
-
-    <!-- CAROUSEL -->
     <div class="carousel">
       <div class="carousel-track">
 
-        <!-- ITEM 1 -->
+        <!-- Item 1 -->
         <div class="carousel-item">
           <div class="agent-card">
             <img class="agent-thumbnail" src="https://cdn-icons-png.flaticon.com/512/4712/4712100.png">
             <h3>Side Hustle AI Agent</h3>
-            <p>Your personal guide to starting, building, and scaling profitable side hustles.</p>
-            <a class="view-btn" href="#sideHustleAgent">View Agent</a>
+            <p>Your personal guide for building profitable AI side hustles.</p>
 
-            <div id="sideHustleAgent" style="margin-top:15px;">
-              <iframe id="JotFormIFrame-0195479af1b879f3a82ea15cbaf3859eaa44"
-                allow="geolocation; microphone; camera; fullscreen"
-                src="https://agent.jotform.com/0195479af1b879f3a82ea15cbaf3859eaa44?embedMode=iframe&background=1&shadow=1"
-                style="width:100%; height:680px; border:none;">
-              </iframe>
+            <a class="view-btn" onclick="scrollInto('agent1')">View Agent</a>
+
+            <div id="agent1" class="agent-iframe-wrapper">
+              <iframe src="https://agent.jotform.com/0195479af1b879f3a82ea15cbaf3859eaa44?embedMode=iframe&background=1&shadow=1"></iframe>
             </div>
           </div>
         </div>
 
-        <!-- ITEM 2 -->
+        <!-- Item 2 -->
         <div class="carousel-item">
           <div class="agent-card">
             <img class="agent-thumbnail" src="https://cdn-icons-png.flaticon.com/512/4712/4712100.png">
             <h3>Debeatzgh AI Assistant</h3>
-            <p>Your all-round AI assistant for ideas, content, tools, and productivity.</p>
-            <a class="view-btn" href="#mainAssistant">View Agent</a>
+            <p>Ideas, creativity, and productivity support for your digital journey.</p>
 
-            <div id="mainAssistant" style="margin-top:15px;">
-              <iframe id="JotFormIFrame-0195424fb5d47897a72080768094791e9c32"
-                allow="geolocation; microphone; camera; fullscreen"
-                src="https://agent.jotform.com/0195424fb5d47897a72080768094791e9c32?embedMode=iframe&background=1&shadow=1"
-                style="width:100%; height:680px; border:none;">
-              </iframe>
+            <a class="view-btn" onclick="scrollInto('agent2')">View Agent</a>
+
+            <div id="agent2" class="agent-iframe-wrapper">
+              <iframe src="https://agent.jotform.com/0195424fb5d47897a72080768094791e9c32?embedMode=iframe&background=1&shadow=1"></iframe>
             </div>
           </div>
         </div>
 
-        <!-- ITEM 3 -->
+        <!-- Item 3 -->
         <div class="carousel-item">
           <div class="agent-card">
             <img class="agent-thumbnail" src="https://cdn-icons-png.flaticon.com/512/4712/4712100.png">
             <h3>AI Companion Assistant</h3>
-            <p>Your friendly, helpful AI partner for learning, tasks & personal support.</p>
-            <a class="view-btn" href="#aiCompanion">View Agent</a>
+            <p>Your friendly learning and productivity partner.</p>
 
-            <div id="aiCompanion" style="margin-top:15px;">
-              <iframe id="JotFormIFrame-0195482a4e8d72b894a09678ddb9b513d564"
-                allow="geolocation; microphone; camera; fullscreen"
-                src="https://agent.jotform.com/0195482a4e8d72b894a09678ddb9b513d564?embedMode=iframe&background=1&shadow=1"
-                style="width:100%; height:680px; border:none;">
-              </iframe>
+            <a class="view-btn" onclick="scrollInto('agent3')">View Agent</a>
+
+            <div id="agent3" class="agent-iframe-wrapper">
+              <iframe src="https://agent.jotform.com/0195482a4e8d72b894a09678ddb9b513d564?embedMode=iframe&background=1&shadow=1"></iframe>
             </div>
           </div>
         </div>
 
       </div>
-
-      <!-- NAVIGATION -->
-      <div class="carousel-nav">
-        <button class="carousel-btn" onclick="moveCarousel(-1)">Prev</button>
-        <button class="carousel-btn" onclick="moveCarousel(1)">Next</button>
-      </div>
-
     </div>
+
+    <div class="carousel-nav">
+      <button class="carousel-btn" onclick="moveCarousel(-1)">Prev</button>
+      <button class="carousel-btn" onclick="moveCarousel(1)">Next</button>
+    </div>
+
   </div>
 </div>
 
-
-<!-- SCRIPTS -->
 <script>
 let index = 0;
-function moveCarousel(direction) {
+
+function moveCarousel(dir) {
   const track = document.querySelector(".carousel-track");
   const items = document.querySelectorAll(".carousel-item");
-  index += direction;
+
+  index += dir;
   if (index < 0) index = items.length - 1;
   if (index >= items.length) index = 0;
+
   track.style.transform = `translateX(-${index * 100}%)`;
 }
 
@@ -233,6 +226,10 @@ function openModal() {
 
 function closeModal() {
   document.getElementById("agentModal").style.display = "none";
+}
+
+function scrollInto(id) {
+  document.getElementById(id).scrollIntoView({ behavior: "smooth" });
 }
 </script>
 
